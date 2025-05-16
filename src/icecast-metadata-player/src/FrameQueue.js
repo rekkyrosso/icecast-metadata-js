@@ -10,6 +10,7 @@ import {
   NOT_SYNCED,
   noOp,
 } from "./global.js";
+import SynAudio from "synaudio";
 
 // test if worker can spawn a worker for (i.e. everything but iOS)
 let canSpawnWorker;
@@ -266,23 +267,23 @@ export default class FrameQueue {
       const samplesToDuration = (samples, rate) => samples / rate;
 
       if (!this._synAudioResult) {
-        let SynAudio;
-        try {
-          SynAudio = (
-            await import(
-              /* webpackChunkName: "synaudio", webpackPrefetch: true */
-              "synaudio"
-            )
-          ).default;
-        } catch (e) {
-          this._icecast[fireEvent](
-            event.WARN,
-            "Failed to synchronize old and new stream",
-            "Missing `synaudio` dependency.",
-          );
-
-          return;
-        }
+        // let SynAudio;
+        // try {
+        //   SynAudio = (
+        //     await import(
+        //       /* webpackChunkName: "synaudio", webpackPrefetch: true */
+        //       "synaudio"
+        //     )
+        //   ).default;
+        // } catch (e) {
+        //   this._icecast[fireEvent](
+        //     event.WARN,
+        //     "Failed to synchronize old and new stream",
+        //     "Missing `synaudio` dependency.",
+        //   );
+        //
+        //   return;
+        // }
 
         const [pcmQueueDecoded, syncQueueDecoded, sampleRate] =
           await this._decodeQueues();
