@@ -31,8 +31,8 @@ import {
 
 import Player from "./players/Player.js";
 import HTML5Player from "./players/HTML5Player.js";
-import MediaSourcePlayer from "./players/MediaSourcePlayer.js";
-import WebAudioPlayer from "./players/WebAudioPlayer.js";
+// import MediaSourcePlayer from "./players/MediaSourcePlayer.js";
+// import WebAudioPlayer from "./players/WebAudioPlayer.js";
 
 export default class PlayerFactory {
   constructor(icecast) {
@@ -61,16 +61,16 @@ export default class PlayerFactory {
   }
 
   static get supportedPlaybackMethods() {
-    return [MediaSourcePlayer, WebAudioPlayer, HTML5Player].map((player) =>
+    return [HTML5Player].map((player) =>
       player.isSupported ? player.name : "",
     );
   }
 
   static canPlayType(type) {
     return {
-      mediasource: MediaSourcePlayer.canPlayType(type),
+      mediasource: false,
       html5: HTML5Player.canPlayType(type),
-      webaudio: WebAudioPlayer.canPlayType(type),
+      webaudio: false,
     };
   }
 
@@ -362,8 +362,8 @@ export default class PlayerFactory {
   _buildPlayer(inputMimeType, codec, codecHeader) {
     // in order of preference
     const { [p.get(this._icecast)[playbackMethod]]: firstMethod, ...rest } = {
-      mediasource: MediaSourcePlayer,
-      webaudio: WebAudioPlayer,
+      // mediasource: MediaSourcePlayer,
+      // webaudio: WebAudioPlayer,
       html5: HTML5Player,
     };
 

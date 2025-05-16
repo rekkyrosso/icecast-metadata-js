@@ -7,7 +7,7 @@ import {
   SYNCED,
   NOT_SYNCED,
 } from "../global.js";
-import FrameQueue from "../FrameQueue.js";
+// import FrameQueue from "../FrameQueue.js";
 
 export default class Player {
   constructor(icecast, endpoint, inputMimeType, codec, codecHeader) {
@@ -182,7 +182,7 @@ export default class Player {
     this.syncState = SYNCED;
     this.syncFrames = [];
     this.syncDelay = null;
-    this._frameQueue = new FrameQueue(this._icecast, this);
+    // this._frameQueue = new FrameQueue(this._icecast, this);
   }
 
   /**
